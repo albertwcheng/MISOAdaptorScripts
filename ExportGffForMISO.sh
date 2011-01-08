@@ -1,4 +1,3 @@
-
 scriptDir=`pwd`
 
 cd ..
@@ -17,7 +16,7 @@ mkdir EventGff
 
 
 for eventType in SE MXE A5SS A3SS A3UTR AFE ALE RI; do
-	EventBEDMaker.py --track-name $eventType --colors "255,0,0_0,0,255" $eventType/$sourceTableSubPath .eventType,.locusName,.eventID .chr .strand ".inc/excBound" >  EventGff/${eventType}.ebed
+	Splidar.Splicing.EventBEDMaker.py --track-name $eventType --colors "255,0,0_0,0,255" $eventType/$sourceTableSubPath .eventType,.locusName,.eventID .chr .strand ".inc/excBound" >  EventGff/${eventType}.ebed
 	ebed2GenePred.py --fs " "  EventGff/${eventType}.ebed > EventGff/${eventType}.genePred
 	RefGeneTable2sGFF3.py --source "Splidar.$eventType" --replace "_." --with "@:" --input-is-gene-pred --expand-parents EventGff/${eventType}.genePred > EventGff/${eventType}.pe.gff3
 	if [ ! -e EventGff/allEvents.pe.GFF3 ]; then
